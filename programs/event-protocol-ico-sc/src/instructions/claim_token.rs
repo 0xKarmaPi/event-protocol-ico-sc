@@ -111,6 +111,7 @@ pub fn process(ctx: Context<ClaimTokenCtx>, nft_address: Pubkey) -> Result<()> {
     // ======
     // Calculate the number of cycles (periods) that have passed since cliff time
     let time_since_cliff = current_time as u64 - (wrapper.init_time + master.cliff_time);
+    // claim 10% of the tokens per cycle
     let cycles_elapsed = ((time_since_cliff / master.cycle) + 1).min(10); // +1 for the initial claim after cliff
 
     msg!("cycles_elapsed: {}", cycles_elapsed);
